@@ -1,0 +1,147 @@
+<script setup>
+import {computed, watch} from "vue";
+import {useForm, usePage} from "@inertiajs/vue3";
+import {useCrud} from "@/Composables/useCrud.js";
+import Loading from "@/Components/Global/Loading.vue";
+import NavigationDrawer from "@/Components/Common/Drawer/NavigationDrawer.vue";
+
+const props = defineProps({
+    modelValue: [Boolean, String],
+    storeId: [String, Number],
+    data: Object,
+})
+
+const roles = computed(()=> usePage().props.roles)
+const emit = defineEmits(['update:modelValue', 'close', 'on-success'])
+
+let form = useForm({
+    id: null,
+    role: props.role,
+    name: props.name,
+    email: props.email,
+    password: props.password,
+    password_confirmation: props.password_confirmation,
+})
+
+watch(() => props.data, (val) => {
+    form.id = val.id ?? null
+    form.role = val.role ?? null
+    form.name = val.name ?? null
+    form.email = val.email ?? null
+
+});
+
+
+const internalValue = computed({
+    set: (val) => {
+        emit('update:modelValue', val)
+    },
+    get: () => props.modelValue
+});
+
+const {submitForm} = useCrud();
+const submit = async () => {
+    await submitForm(form, `admin.users.${form.id ? 'update' : 'store'}`, null, true, true)
+        .then((result) => {
+            emit('on-success')
+            form.reset();
+            internalValue.value = false;
+        })
+}
+
+const onClose = () => {
+    form.reset()
+    emit('close')
+}
+
+
+watch(() =>internalValue.value,() =>{
+    if(!internalValue.value){
+        form.reset();
+    }
+
+})
+
+</script>
+
+<template>
+    <Loading :show="form.processing"/>
+    <NavigationDrawer
+        class="z-50"
+        @close="onClose"
+        v-model="internalValue"
+        size="400"
+    >
+        <template #header>
+            <p class="font-semibold text-lg">{{ `${form.id ? 'Update' : 'Create'} User` }}</p>
+        </template>
+        <template #default>
+            <VSelect
+                color="primary"
+                label="Role"
+                variant="outlined"
+                density="comfortable"
+                :items="roles"
+                v-model="form.role"
+                :error-messages="form.errors.role"
+                @update:model-value="form.clearErrors('role')"
+            />
+            <VTextField
+                color="primary"
+                label="Name"
+                variant="outlined"
+                density="comfortable"
+                v-model="form.name"
+                :error-messages="form.errors.name"
+                @update:model-value="form.clearErrors('name')"
+            />
+            <VTextField
+                color="primary"
+                label="Email"
+                variant="outlined"
+                density="comfortable"
+                v-model="form.email"
+                :error-messages="form.errors.email"
+                @update:model-value="form.clearErrors('email')"
+            />
+            <VTextField
+                color="primary"
+                label="Password"
+                variant="outlined"
+                type="password"
+                density="comfortable"
+                v-model="form.password"
+                :error-messages="form.errors.password"
+                @update:model-value="form.clearErrors('password')"
+            />
+            <VTextField
+                color="primary"
+                label="Confirm Password"
+                variant="outlined"
+                type="password"
+                density="comfortable"
+                v-model="form.password_confirmation"
+                :error-messages="form.errors.password_confirmation"
+                @update:model-value="form.clearErrors('password_confirmation')"
+            />
+
+        </template>
+        <template #footer>
+            <div class="flex gap-4 justify-end">
+                <VBtn color="error" @click="internalValue = false">
+                    Close
+                </VBtn>
+                <VBtn @click="form.reset()">
+                    Clear Fields
+                </VBtn>
+                <VBtn variant="flat" color="primary" @click="submit">
+                    {{ form.id ? 'Update' : 'Submit' }}
+                </VBtn>
+            </div>
+        </template>
+    </NavigationDrawer>
+</template>
+
+<style scoped>
+
+</style>

@@ -1,0 +1,8 @@
+<?php
+
+namespace App\Models\$CLASS_NAME$\Relations;
+
+trait $CLASS_NAME$Relation
+{
+
+}

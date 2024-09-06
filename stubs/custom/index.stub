@@ -1,0 +1,85 @@
+<script setup>
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import {Head, usePage} from "@inertiajs/vue3";
+import DataTable from "@/Components/Common/Table/DataTable.vue";
+import {computed, ref} from "vue";
+import ActionDelete from "@/Components/Common/Button/ActionDelete.vue";
+import ActionEdit from "@/Components/Common/Button/ActionEdit.vue";
+import {useCrud} from "@/Composables/useCrud.js";
+import PageHeader from "@/Components/Global/PageHeader.vue";
+import $CLASS_NAME$Form from "@/Pages/$CLASS_NAME$/$CLASS_NAME$Form.vue";
+
+
+const tableHeader = [
+    {label: 'Name', field: 'name'},
+    {label: 'Actions', field: 'action', width: '5%'},
+]
+
+const $CLASS_NAME_LOWER$s = computed(() => usePage().props.$CLASS_NAME_LOWER$s);
+const store_id = computed(() => usePage().props.store_id);
+
+const show$CLASS_NAME$Form = ref(false)
+
+const $CLASS_NAME_LOWER$Data = ref({});
+
+const editData = (data) => {
+    $CLASS_NAME_LOWER$Data.value = {...data}
+    show$CLASS_NAME$Form.value = true;
+}
+
+const {destroy} = useCrud();
+const destroyData = (id) => {
+    destroy(route('admin.$CLASS_NAME_LOWER$s.destroy', id))
+}
+
+</script>
+
+<template>
+    <Head title="$CLASS_NAME$"/>
+    <$CLASS_NAME$Form
+        v-model="show$CLASS_NAME$Form"
+        :store-id="store_id"
+        :data="$CLASS_NAME_LOWER$Data"
+    />
+    <AuthenticatedLayout>
+        <template #page-header>
+            <div class="flex justify-between items-start">
+                <PageHeader :link="`$CLASS_NAME$s / $CLASS_NAME$ List`" :title="`$CLASS_NAME$ List`"/>
+                <VBtn @click="show$CLASS_NAME$Form = true" variant="outlined" color="primary">
+                    <i class="bi bi-plus mr-1"></i>
+                    Create
+                </VBtn>
+            </div>
+        </template>
+        <div class="overflow-y-auto">
+            <div class="bg-white rounded-lg p-6">
+                <DataTable
+                    class="mb-12"
+                    :columns="tableHeader"
+                    :data="$CLASS_NAME_LOWER$s"
+                    :filter-link="route('admin.$CLASS_NAME_LOWER$s.index')"
+                >
+                    <template #column_name="{props}">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <p class="font-semibold text-sm">{{ props.name }}</p>
+                                <span class="text-sm">{{ props.email }}</span>
+                            </div>
+                        </div>
+                    </template>
+                    <template #column_action="{props}">
+                        <div class="flex justify-end items-center">
+                            <ActionEdit @click="editData(props)"/>
+                            <ActionDelete @click="destroyData(props.id)"/>
+                        </div>
+                    </template>
+                </DataTable>
+            </div>
+        </div>
+    </AuthenticatedLayout>
+
+</template>
+
+<style scoped>
+
+</style>

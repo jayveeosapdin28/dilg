@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Models\$CLASS_NAME$\Scopes;
+
+use Illuminate\Database\Eloquent\Builder;
+
+trait $CLASS_NAME$Scope
+{
+
+}

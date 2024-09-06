@@ -1,0 +1,90 @@
+<script setup>
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import {Head, usePage} from "@inertiajs/vue3";
+import DataTable from "@/Components/Common/Table/DataTable.vue";
+import {computed, ref} from "vue";
+import ActionDelete from "@/Components/Common/Button/ActionDelete.vue";
+import ActionEdit from "@/Components/Common/Button/ActionEdit.vue";
+import {useCrud} from "@/Composables/useCrud.js";
+import PageHeader from "@/Components/Global/PageHeader.vue";
+import EventForm from "@/Pages/Event/EventForm.vue";
+import PageHeading from "@/Components/Global/Navigators/PageHeading.vue";
+
+
+const tableHeader = [
+    {label: 'Name', field: 'name'},
+    {label: 'Actions', field: 'action', width: '5%'},
+]
+
+const events = computed(() => usePage().props.events);
+const store_id = computed(() => usePage().props.store_id);
+
+const showEventForm = ref(false)
+
+const eventData = ref({});
+
+const editData = (data) => {
+    eventData.value = {...data}
+    showEventForm.value = true;
+}
+
+const {destroy} = useCrud();
+const destroyData = (id) => {
+    destroy(route('admin.events.destroy', id))
+}
+const title = 'Events'
+const pages = [
+  {name: 'Events', href: '#', current: true},
+]
+</script>
+
+<template>
+    <Head title="Event"/>
+    <EventForm
+        v-model="showEventForm"
+        :store-id="store_id"
+        :data="eventData"
+    />
+    <AuthenticatedLayout>
+      <PageHeading :title="title" :pages="pages">
+        <template #action>
+          <div class="space-x-4">
+            <VBtn @click="showEventForm = true" variant="outlined" color="primary">
+              <i class="bi bi-plus mr-1"></i>
+              Create
+            </VBtn>
+          </div>
+        </template>
+      </PageHeading>
+        <div class="overflow-y-auto">
+            <div class="bg-white rounded-lg p-6">
+                <DataTable
+                    class="mb-12"
+                    :columns="tableHeader"
+                    :data="events"
+                    :filter-link="route('admin.events.index')"
+                >
+                    <template #column_name="{props}">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <p class="font-semibold text-sm">{{ props.name }}</p>
+                                <span class="text-sm">{{ props.email }}</span>
+                            </div>
+                        </div>
+                    </template>
+                    <template #column_action="{props}">
+                        <div class="flex justify-end items-center">
+                            <ActionEdit @click="editData(props)"/>
+                            <ActionDelete @click="destroyData(props.id)"/>
+                        </div>
+                    </template>
+                </DataTable>
+            </div>
+        </div>
+    </AuthenticatedLayout>
+
+</template>
+
+<style scoped>
+
+</style>

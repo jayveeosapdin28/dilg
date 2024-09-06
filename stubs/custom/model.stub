@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Models\$CLASS_NAME$;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\$CLASS_NAME$\Relations\$CLASS_NAME$Relation;
+use App\Models\$CLASS_NAME$\Scopes\$CLASS_NAME$Scope;
+
+class $CLASS_NAME$ extends Model
+{
+    use HasFactory,$CLASS_NAME$Scope,$CLASS_NAME$Relation;
+}
