@@ -25,7 +25,7 @@ class UpdateEventRequest extends FormRequest
             'event_name' => ['required', 'max:255'],
             'description' => ['required', 'max:1000'],
             'date_open' => 'required|date|after_or_equal:today',
-            'date_closed' => 'required|date|after:date_open',
+            'date_close' => 'required|date|after:date_open',
         ];
     }
 }

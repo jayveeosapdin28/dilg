@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('event_name');
-            $table->dateTime('date_and_time');
+            $table->date('date_open');
+            $table->date('date_close');
             $table->foreignId('country_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('state_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('city_id')->nullable()->constrained()->nullOnDelete();

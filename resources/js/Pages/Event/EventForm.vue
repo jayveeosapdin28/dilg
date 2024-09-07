@@ -18,7 +18,7 @@ let form = useForm({
     event_name: props.event_name,
     description: props.description,
     date_open: props.date_open,
-    date_closed: props.date_closed,
+    date_close: props.date_close,
     status: props.status,
 })
 
@@ -100,9 +100,9 @@ watch(() =>internalValue.value,() =>{
                 type="date"
                 variant="outlined"
                 density="comfortable"
-                v-model="form.date_closed"
-                :error-messages="form.errors.date_closed"
-                @update:model-value="form.clearErrors('date_closed')"
+                v-model="form.date_close"
+                :error-messages="form.errors.date_close"
+                @update:model-value="form.clearErrors('date_close')"
             />
             <VTextarea
                 color="primary"

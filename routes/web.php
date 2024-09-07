@@ -13,6 +13,7 @@ use App\Http\Controllers\V1\Event\EventController;
 use App\Http\Controllers\V1\User\UserController;
 use App\Http\Controllers\V1\Chat\ChatController;
 use App\Http\Controllers\V1\Notification\NotificationController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->group(function (){
         Route::post('task/submit',[TaskController::class,"submitDocument"])->name('task.submit');

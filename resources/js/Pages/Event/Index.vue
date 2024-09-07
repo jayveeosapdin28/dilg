@@ -12,7 +12,7 @@ import PageHeading from "@/Components/Global/Navigators/PageHeading.vue";
 
 
 const tableHeader = [
-    {label: 'Name', field: 'name'},
+    {label: 'Name', field: 'event_name'},
     {label: 'Actions', field: 'action', width: '5%'},
 ]
 

@@ -19,13 +19,13 @@ class EventController extends Controller
 
               $pages = $request->input('pages', 10);
               $order_by = $request->input('order_by', 'ASC');
-              $sort_by = $request->input('sort_by', 'name');
+              $sort_by = $request->input('sort_by', 'event_name');
 
               $events = Event::with([])
                   ->where(function ($query) use ($request) {
                       $query->when($request->has('query'), function ($query) use ($request) {
                           $queryString = trim($request['query']);
-                          $query->where('name', 'LIKE', "%{$queryString}%");
+                          $query->where('event_name', 'LIKE', "%{$queryString}%");
                       });
                   })
                   ->orderBy($sort_by, $order_by)
