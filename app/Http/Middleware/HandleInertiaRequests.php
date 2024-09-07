@@ -33,7 +33,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'csrf_token' => csrf_token(),
-            'notifications' => Notification::where('user_id', auth()->user()->id)->where('read',0)->get(),
+            'notifications' => auth()->id() ?  Notification::where('user_id', auth()->user()->id)->where('read',0)->get() : [],
             'auth' => [
                 'user' => $request->user(),
             ],
