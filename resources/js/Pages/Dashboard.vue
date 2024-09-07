@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head, usePage, Link} from '@inertiajs/vue3';
 import {computed} from "vue";
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/20/solid'
+import PageHeading from "@/Components/Global/Navigators/PageHeading.vue";
 
 
 const data = computed(()=>usePage().props.data)
@@ -12,10 +13,7 @@ const data = computed(()=>usePage().props.data)
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template>
-
+        <PageHeading title="Dashboard" ></PageHeading>
         <div class="py-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div v-for="item in data" :key="item.id" class="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6">
                 <dt>
