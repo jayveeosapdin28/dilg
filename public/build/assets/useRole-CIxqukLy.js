@@ -1,1 +1,0 @@
-import{Q as s,m as r}from"./app-DDm3ur_q.js";function l(){const o=s();return{hasRole:e=>r(()=>o.props.auth.user.role.indexOf(e)!==-1).value,isInRole:e=>r(()=>e.includes(o.props.auth.user.role)).value}}export{l as u};
