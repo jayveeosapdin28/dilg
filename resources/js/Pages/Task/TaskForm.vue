@@ -137,7 +137,7 @@ watch(() => internalValue.value, () => {
       </div>
 
       <Editor
-          label="Details"
+          label="Instructions"
           v-model="form.description"
           :error="form.errors.description"
           @update:model-value="form.clearErrors('description')"
