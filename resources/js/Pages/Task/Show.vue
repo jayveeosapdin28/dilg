@@ -94,7 +94,7 @@ const tableHeader = [
             </template>
             <template #column_file_url="{props}">
               <div class="flex justify-end items-center">
-                <ActionDownload link v-if="props.file_url" :to="props.file_url"/>
+                <a :href="props.file_url" download="SKYNOTA.docx"></a>
               </div>
             </template>
           </DataTable>
@@ -102,7 +102,7 @@ const tableHeader = [
         <div v-if="hasRole('User')" class="mt-14 bg-white  space-y-8">
           <div v-if="file">
             <h2 class="text-primary-400  mb-4 font-semibold">My work:</h2>
-            <a class="text-primary-500 hover:underline cursor-pointer font-semibold" :href="file.file_url"
+            <a class="text-primary-500 hover:underline cursor-pointer font-semibold" download="SKYNOTA.docx" :href="file.file_url"
                target="_blank">
               <div class="bg-white rounded border border-primary-600 p-4 flex items-center gap-2">
                 <i :class="mimeTypeIcon(file.file?.mime_type)" class="text-2xl text-primary-500"></i>
