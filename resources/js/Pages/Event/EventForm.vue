@@ -122,8 +122,7 @@ onMounted(() => {
       class="z-50"
       @close="onClose"
       v-model="internalValue"
-      size="400"
-      width="60"
+      width="900"
   >
     <template #header>
       <p class="font-semibold text-lg">{{ `${form.id ? 'Update' : 'Create'} Event` }}</p>

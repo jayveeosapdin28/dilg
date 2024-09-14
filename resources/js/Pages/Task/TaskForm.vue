@@ -81,7 +81,7 @@ watch(() => internalValue.value, () => {
       class="z-50"
       @close="onClose"
       v-model="internalValue"
-      width="60"
+      width="900"
   >
     <template #header>
       <p class="font-semibold text-lg">{{ `${form.id ? 'Update' : 'Create'} Task` }}</p>

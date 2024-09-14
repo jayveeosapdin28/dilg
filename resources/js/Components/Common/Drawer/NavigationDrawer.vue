@@ -21,7 +21,7 @@ const internalValue = computed({
 <template>
   <Transition name="nested">
     <div v-if="internalValue" class="fixed h-screen w-full bg-primary-500 bg-opacity-50 flex justify-end z-10">
-      <div :class="width ? `sm:w-[${width}rem]` : 'sm:w-[25rem]'" class="shadow bg-white w-full  py-4 px-6 inner flex flex-col overflow-y-auto">
+      <div :class="width ? `sm:w-[${width}px]` : 'sm:w-[25rem]'" class="shadow bg-white w-full  py-4 px-6 inner flex flex-col overflow-y-auto">
         <slot name="header"/>
         <div class="flex-grow py-4">
           <slot/>
