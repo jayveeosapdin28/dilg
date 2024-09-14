@@ -9,10 +9,13 @@ import {useCrud} from "@/Composables/useCrud.js";
 import PageHeader from "@/Components/Global/PageHeader.vue";
 import EventForm from "@/Pages/Event/EventForm.vue";
 import PageHeading from "@/Components/Global/Navigators/PageHeading.vue";
+import {useRole} from "@/Composables/useRole.js";
 
 
 const tableHeader = [
     {label: 'Name', field: 'event_name'},
+    {label: 'From', field: 'date_open'},
+    {label: 'To', field: 'date_close'},
     {label: 'Actions', field: 'action', width: '5%'},
 ]
 
@@ -22,6 +25,8 @@ const store_id = computed(() => usePage().props.store_id);
 const showEventForm = ref(false)
 
 const eventData = ref({});
+
+const {isInRole} = useRole()
 
 const editData = (data) => {
     eventData.value = {...data}
@@ -36,6 +41,7 @@ const title = 'Events'
 const pages = [
   {name: 'Events', href: '#', current: true},
 ]
+
 </script>
 
 <template>
@@ -74,8 +80,8 @@ const pages = [
                     </template>
                     <template #column_action="{props}">
                         <div class="flex justify-end items-center">
-                            <ActionEdit @click="editData(props)"/>
-                            <ActionDelete @click="destroyData(props.id)"/>
+                            <ActionEdit v-if="isInRole(['Super Admin', 'Admin'])" @click="editData(props)"/>
+                            <ActionDelete v-if="isInRole(['Super Admin', 'Admin'])" @click="destroyData(props.id)"/>
                         </div>
                     </template>
                 </DataTable>

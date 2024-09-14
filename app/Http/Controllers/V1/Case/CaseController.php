@@ -29,6 +29,9 @@ class CaseController extends Controller
                           $query->where('name', 'LIKE', "%{$queryString}%");
                       });
                   })
+                  ->when(auth()->user()->role === 'User',function ($query){
+                      $query->where('user_id', auth()->user()->id);
+                  })
                   ->orderBy($sort_by, $order_by)
                   ->paginate($pages)
                   ->withQueryString();

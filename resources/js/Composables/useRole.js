@@ -8,7 +8,7 @@ export function useRole() {
         return computed(() => page.props.auth.user.role.indexOf(roleName) !== -1).value;
     };
     const isInRole = (roles) => {
-        return computed(() => roles.includes(page.props.auth.user.role)).value;
+        return Array.isArray(roles) ? computed(() => roles.includes(page.props.auth.user.role)).value : false;
     };
 
     return {

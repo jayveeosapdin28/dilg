@@ -20,6 +20,7 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
+
         abort_if(!auth()->user()->can('access task'), Response::HTTP_FORBIDDEN, '401 Unauthorized');
 
         $pages = $request->input('pages', 10);
@@ -33,7 +34,10 @@ class TaskController extends Controller
                     $query->where('name', 'LIKE', "%{$queryString}%");
                 });
             })
-            ->whereJsonContains('users', auth()->user()->id)
+            ->when(auth()->user()->role === 'User',function ($query){
+                $query->whereJsonContains('users', auth()->user()->id);
+            })
+            ->withCount('documents')
             ->orderBy($sort_by, $order_by)
             ->paginate($pages)
             ->withQueryString();
@@ -79,6 +83,7 @@ class TaskController extends Controller
         $sort_by = $request->input('sort_by', 'id');
 
         $task = Task::find($id);
+
         $documents = $task->documents()
             ->with(['user'])
             ->orderBy($sort_by, $order_by)

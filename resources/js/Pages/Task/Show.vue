@@ -59,7 +59,8 @@ const tableHeader = [
             <p>Due Date: <b>{{date(date.due_date)}}</b></p>
         </div>
         <div  v-if="hasRole('Super Admin') || hasRole('Admin')" class="mt-8 bg-white rounded-lg shadow-lg p-6  h-full overflow-y-auto space-y-4">
-          <DataTable
+            <h2 class="font-semibold text-xl">Submitters List</h2>
+            <DataTable
               :searchable="false"
               class="mb-12"
               :columns="tableHeader"

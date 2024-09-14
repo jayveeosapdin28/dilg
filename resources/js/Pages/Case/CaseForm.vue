@@ -4,12 +4,15 @@ import {useForm} from "@inertiajs/vue3";
 import {useCrud} from "@/Composables/useCrud.js";
 import Loading from "@/Components/Global/Loading.vue";
 import NavigationDrawer from "@/Components/Common/Drawer/NavigationDrawer.vue";
+import {useRole} from "@/Composables/useRole.js";
 
 const props = defineProps({
     modelValue: [Boolean, String],
     storeId: [String, Number],
     data: Object,
 })
+
+const {isInRole} = useRole();
 
 const emit = defineEmits(['update:modelValue', 'close', 'on-success'])
 
@@ -85,7 +88,7 @@ watch(() => internalValue.value, () => {
                 :error-messages="form.errors.name"
                 @update:model-value="form.clearErrors('name')"
             />
-            {{form.date_open}}
+
             <VTextField
                 color="primary"
                 label="Open"
@@ -115,6 +118,18 @@ watch(() => internalValue.value, () => {
                 :error-messages="form.errors.description"
                 @update:model-value="form.clearErrors('description')"
             />
+            <VSelect
+                v-if="form.id && (isInRole(['Admin','Super Admin']))"
+                color="primary"
+                label="Status"
+                variant="outlined"
+                density="comfortable"
+                :items="['Open', 'On Process', 'Hold','Closed']"
+                v-model="form.status"
+                :error-messages="form.errors.status"
+                @update:model-value="form.clearErrors('status')"
+            />
+
 
         </template>
         <template #footer>

@@ -25,6 +25,7 @@ const tableHeader = ref([
   {label: 'Status', field: 'status',align: 'center'},
   {label: 'Priority', field: 'priority', align: 'center'},
   {label: 'Description', field: 'description'},
+  {label: 'Submitted Documents', field: 'documents_count'},
   {label: 'Comment', field: 'comments'},
   {label: 'Due Date', field: 'due_date'},
   {label: 'Due Date', field: 'due_date'},

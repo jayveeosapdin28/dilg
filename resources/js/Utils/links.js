@@ -6,13 +6,13 @@ const navigation = [
         base_route: 'dashboard',
         access: ['Admin', 'Super Admin', 'User']
     },
-    {
-        label: 'Document',
-        icon: 'bi bi-files',
-        route: 'admin.documents.index',
-        base_route: 'admin.documents.*',
-        access: ['Admin', 'Super Admin', 'User']
-    },
+    // {
+    //     label: 'Document',
+    //     icon: 'bi bi-files',
+    //     route: 'admin.documents.index',
+    //     base_route: 'admin.documents.*',
+    //     access: ['Admin', 'Super Admin', 'User']
+    // },
     {
         label: 'Task',
         icon: 'bi bi-card-checklist',
@@ -60,6 +60,7 @@ const navigation = [
         icon: 'bi bi-lock',
         route: 'profile.edit',
         base_route: 'profile.*',
+        access: ['Admin', 'Super Admin','User']
     },
 
 ]

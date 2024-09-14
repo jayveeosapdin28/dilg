@@ -54,22 +54,24 @@ class DashboardController extends Controller
 
     protected function calculateStatsPercentage($modelClass)
     {
+        // Define the start and end of today
         $todayStart = Carbon::now()->startOfDay();
         $todayEnd = Carbon::now()->endOfDay();
 
-        $yesterdayStart = Carbon::now()->subDay()->startOfDay();
-        $yesterdayEnd = Carbon::now()->subDay()->endOfDay();
+        // Get the total records created today
+        $totalRecordsToday = $modelClass::whereBetween('created_at', [$todayStart, $todayEnd])->count();
 
-        $totalSubscribersToday = $modelClass::whereBetween('created_at', [$todayStart, $todayEnd])->count();
-        $totalSubscribersYesterday = $modelClass::whereBetween('created_at', [$yesterdayStart, $yesterdayEnd])->count();
+        // Get the total records excluding today's records (i.e., previous records)
+        $totalRecordsPrevious = $modelClass::count() - $totalRecordsToday;
 
-        $change = $totalSubscribersToday - $totalSubscribersYesterday;
+        // Calculate the change and percentage
+        $change = $totalRecordsToday - $totalRecordsPrevious;
         $changeType = $change > 0 ? 'increase' : ($change < 0 ? 'decrease' : 'no change');
-        $percentageChange = $totalSubscribersYesterday > 0
-            ? ($change / $totalSubscribersYesterday) * 100
+        $percentageChange = $totalRecordsPrevious > 0
+            ? ($change / $totalRecordsPrevious) * 100
             : 0;
 
-
+        // Format the percentage change
         $formattedPercentageChange = $change > 0
             ? '+' . number_format($percentageChange, 1) . '%'
             : ($change < 0
@@ -82,4 +84,5 @@ class DashboardController extends Controller
             'percentageChange' => $formattedPercentageChange,
         ];
     }
+
 }
