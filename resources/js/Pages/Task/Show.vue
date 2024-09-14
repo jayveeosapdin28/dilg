@@ -94,7 +94,10 @@ const tableHeader = [
             </template>
             <template #column_file_url="{props}">
               <div class="flex justify-end items-center">
-                <a :href="props.file_url" download="SKYNOTA.docx"></a>
+                <a :href="props.file_url" download="SKYNOTA.docx" class="flex gap-2 hover:bg-primary-600 hover:text-white items-center border border-primary-600 text-primary-600 px-3 py-1 rounded-full">
+                  <i class="bi bi-download"></i>
+                  Download
+                </a>
               </div>
             </template>
           </DataTable>
