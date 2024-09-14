@@ -9,7 +9,9 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
-
+    safelist: [
+        'sm:w-[900px]',
+    ],
     theme: {
         container: {
             padding: {
