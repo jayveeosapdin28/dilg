@@ -2,6 +2,9 @@
 
 namespace App\Models\Event;
 
+use App\Models\Address\Barangay;
+use App\Models\Address\City;
+use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Event\Relations\EventRelation;
@@ -24,6 +27,10 @@ class Event extends Model
         'description',
     ];
 
+    protected $appends = [
+        'location'
+    ];
+
     public static function boot()
     {
         parent::boot();
@@ -32,5 +39,25 @@ class Event extends Model
             $model->country = 'Philippines';
             $model->zip_code = '0';
         });
+    }
+
+    public function getLocationAttribute() {
+        // Fetch optional province, city, and barangay descriptions
+        $province = optional(Province::where('province_code', $this->state)->select('province_description')->first())->province_description;
+        $city = optional(City::where('city_municipality_code', $this->city)->select('city_municipality_description')->first())->city_municipality_description;
+        $barangay = optional(Barangay::where('barangay_code', $this->barangay)->select('barangay_description')->first())->barangay_description;
+
+        // Build location string, checking for null values
+        $locationParts = array_filter([
+            $this->street,
+            $barangay,
+            $city,
+            $province,
+            $this->country
+        ]);
+
+        // Join parts and capitalize
+        $location = implode(', ', $locationParts);
+        return ucwords(strtolower($location));
     }
 }

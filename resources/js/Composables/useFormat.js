@@ -4,8 +4,8 @@ import dayjs from "dayjs";
 
 export function useFormat() {
 
-    const date = (date) => {
-        return dayjs(date).format('MM/DD/YYYY')
+    const date = (date, format = 'MM/DD/YYYY') => {
+        return dayjs(date).format(format)
     };
 
     const mimeTypeIcon = (mimeType) => {

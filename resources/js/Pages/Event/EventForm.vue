@@ -5,6 +5,7 @@ import {useCrud} from "@/Composables/useCrud.js";
 import Loading from "@/Components/Global/Loading.vue";
 import NavigationDrawer from "@/Components/Common/Drawer/NavigationDrawer.vue";
 import Editor from "@/Components/Common/Form/Editor.vue";
+import {useFormat} from "@/Composables/useFormat.js";
 
 const props = defineProps({
   modelValue: [Boolean, String],
@@ -18,6 +19,8 @@ const cities = computed(() => usePage().props.cities)
 const provinces = computed(() => usePage().props.provinces)
 const barangays = computed(() => usePage().props.barangays)
 const request = computed(() => usePage().props.request)
+
+const {date} = useFormat()
 
 let form = useForm({
   id: null,
@@ -37,8 +40,12 @@ watch(() => props.data, (val) => {
   form.event_name = val.event_name ?? null
   form.description = val.description ?? null
   form.date_open = val.date_open ?? null
-  form.date_closed = val.date_closed ?? null
+  form.date_close = val.date_close ?? null
   form.status = val.status ?? null
+  form.state = val.state ?? null
+  form.city = val.city ?? null
+  form.street = val.street ?? null
+  form.barangay = val.barangay ?? null
 });
 
 const filter = ref({

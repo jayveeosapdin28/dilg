@@ -14,6 +14,7 @@ import ActionView from "@/Components/Common/Button/ActionView.vue";
 
 const tableHeader = [
     {label: 'Name', field: 'event_name'},
+    {label: 'Location', field: 'location'},
     {label: 'From', field: 'date_open'},
     {label: 'To', field: 'date_close'},
     {label: 'Actions', field: 'action', width: '5%'},

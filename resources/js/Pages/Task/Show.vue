@@ -1,5 +1,5 @@
 <script setup>
-import {Head, useForm, usePage} from "@inertiajs/vue3";
+import {Head, Link, useForm, usePage} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PageHeading from "@/Components/Global/Navigators/PageHeading.vue";
 import {useRole} from "@/Composables/useRole.js";
@@ -52,6 +52,15 @@ const tableHeader = [
 <template>
   <Head :title="title"/>
   <AuthenticatedLayout>
+    <div class="pb-12">
+      <Link :href="route('admin.tasks.index')">
+        <VBtn  variant="outlined" color="primary">
+          <i class="bi bi-chevron-left mr-1"></i>
+          Back
+        </VBtn>
+      </Link>
+    </div>
+
     <div class="h-full overflow-y-auto pb-8">
       <div class="max-w-5xl mx-auto px-6 ">
         <h2 class="font-semibold text-slate-800 text-4xl">{{ title }}</h2>

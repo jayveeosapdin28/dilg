@@ -24,7 +24,7 @@ class EventController extends Controller
 
               $pages = $request->input('pages', 10);
               $order_by = $request->input('order_by', 'ASC');
-              $sort_by = $request->input('sort_by', 'event_name');
+              $sort_by = $request->input('sort_by', 'date_open');
 
               $events = Event::with([])
                   ->where(function ($query) use ($request) {

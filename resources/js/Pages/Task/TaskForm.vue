@@ -8,6 +8,7 @@ import FileUploader from "@/Components/Common/Form/FileUploader.vue";
 import DatePicker from "@/Components/Common/Form/DatePicker.vue";
 import {useRole} from "@/Composables/useRole.js";
 import Editor from "@/Components/Common/Form/Editor.vue";
+import {useFormat} from "@/Composables/useFormat.js";
 
 const props = defineProps({
   modelValue: [Boolean, String],
@@ -17,7 +18,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'close', 'on-success'])
 const users = computed(() => usePage().props.users)
-
+const {date} = useFormat()
 
 let form = useForm({
   id: null,
@@ -34,7 +35,7 @@ watch(() => props.data, (val) => {
   form.id = val.id ?? null
   form.name = val.name ?? null
   form.description = val.description ?? null
-  form.due_date = val.due_date ?? null
+  form.due_date = date(val.due_date,'YYYY-MM-DD') ?? null
   form.priority = val.priority ?? null
   form.status = val.status ?? null
   form.users = val.users ?? null
@@ -87,10 +88,12 @@ watch(() => internalValue.value, () => {
     </template>
     <template #default>
 
+
       <div class="grid md:grid-cols-2 gap-4">
         <VTextField
             color="primary"
             label="Name"
+            class="w-full"
             variant="outlined"
             density="comfortable"
             v-model="form.name"

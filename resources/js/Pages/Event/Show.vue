@@ -1,5 +1,5 @@
 <script setup>
-import {Head, useForm, usePage} from "@inertiajs/vue3";
+import {Head, Link, useForm, usePage} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PageHeading from "@/Components/Global/Navigators/PageHeading.vue";
 import {useRole} from "@/Composables/useRole.js";
@@ -30,6 +30,15 @@ const title = data.value?.event_name
 <template>
   <Head :title="title"/>
   <AuthenticatedLayout>
+    <div class="pb-12">
+      <Link :href="route('admin.events.index')">
+        <VBtn  variant="outlined" color="primary">
+          <i class="bi bi-chevron-left mr-1"></i>
+          Back
+        </VBtn>
+      </Link>
+    </div>
+
     <div class="h-full overflow-y-auto pb-8">
       <div class="max-w-5xl mx-auto px-6 ">
         <h2 class="font-semibold text-slate-800 text-4xl">{{ title }}</h2>
@@ -37,7 +46,7 @@ const title = data.value?.event_name
           <p>Posted Date: <b>{{ date(data.created_at) }}</b></p>
           <p>From: <b>{{ date(data.date_open) }}</b></p>
           <p>To: <b>{{ date(data.date_close) }}</b></p>
-          <p>Location: <span class="text-primary-400">{{ date(data.date_close) }}</span></p>
+          <p v-if="data.location">Location: <span class="text-primary-400">{{ data.location }}</span></p>
         </div>
         <div class="mt-12">
           <h2 class="text-primary-400 mb-4 font-semibold">Details:</h2>
