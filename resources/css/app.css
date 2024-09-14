@@ -6,6 +6,14 @@
     display: none;
 }
 
+.tox-promotion-link{
+    display: none !important;
+}
+
+.tox-statusbar__branding{
+    display: none !important;
+}
+
 .v-input__details{
     padding: 0 !important;
 }

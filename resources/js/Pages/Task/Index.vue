@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, usePage} from "@inertiajs/vue3";
+import {Head, usePage,Link} from "@inertiajs/vue3";
 import DataTable from "@/Components/Common/Table/DataTable.vue";
 import {computed, onMounted, ref} from "vue";
 import ActionDelete from "@/Components/Common/Button/ActionDelete.vue";
@@ -24,7 +24,6 @@ const tableHeader = ref([
   {label: 'Name', field: 'name'},
   {label: 'Status', field: 'status',align: 'center'},
   {label: 'Priority', field: 'priority', align: 'center'},
-  {label: 'Description', field: 'description'},
   {label: 'Submitted Documents', field: 'documents_count'},
   {label: 'Comment', field: 'comments'},
   {label: 'Due Date', field: 'due_date'},
@@ -88,10 +87,9 @@ onMounted(()=>{
                 >
                     <template #column_name="{props}">
                         <div class="flex items-center gap-3">
-                            <div>
-                                <p class="font-semibold text-sm">{{ props.name }}</p>
-                                <span class="text-sm">{{ props.email }}</span>
-                            </div>
+                            <Link :href="route('admin.tasks.show',props.id)">
+                                <p class="font-semibold text-sm hover:text-primary-600 hover:underline">{{ props.name }}</p>
+                            </Link>
                         </div>
                     </template>
                   <template #column_priority="{props}">

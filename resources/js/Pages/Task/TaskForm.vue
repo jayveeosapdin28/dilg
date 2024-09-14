@@ -7,6 +7,7 @@ import NavigationDrawer from "@/Components/Common/Drawer/NavigationDrawer.vue";
 import FileUploader from "@/Components/Common/Form/FileUploader.vue";
 import DatePicker from "@/Components/Common/Form/DatePicker.vue";
 import {useRole} from "@/Composables/useRole.js";
+import Editor from "@/Components/Common/Form/Editor.vue";
 
 const props = defineProps({
   modelValue: [Boolean, String],
@@ -15,7 +16,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'close', 'on-success'])
-const users = computed(()=> usePage().props.users)
+const users = computed(() => usePage().props.users)
 
 
 let form = useForm({
@@ -79,66 +80,69 @@ watch(() => internalValue.value, () => {
       class="z-50"
       @close="onClose"
       v-model="internalValue"
-      size="400"
+      width="60"
   >
     <template #header>
       <p class="font-semibold text-lg">{{ `${form.id ? 'Update' : 'Create'} Task` }}</p>
     </template>
     <template #default>
-      <VTextField
-          color="primary"
-          label="Name"
-          variant="outlined"
-          density="comfortable"
-          v-model="form.name"
-          :error-messages="form.errors.name"
-          @update:model-value="form.clearErrors('name')"
-      />
-      <VTextField
-          type="date"
-          label="Due Date"
-          variant="outlined"
-          density="comfortable"
-          v-model="form.due_date"
-          :error-messages="form.errors.due_date"
-          @update:model-value="form.clearErrors('due_date')"
-      />
 
-      <VSelect
-          color="primary"
-          label="Priority"
-          variant="outlined"
-          density="comfortable"
-          :items="['Low', 'Medium', 'High']"
-          v-model="form.priority"
-          :error-messages="form.errors.priority"
-          @update:model-value="form.clearErrors('priority')"
-      />
-      <VSelect
-          color="primary"
-          label="Assign To"
-          multiple
-          closable-chips
-          chips
-          variant="outlined"
-          density="comfortable"
-          :items="users"
-          item-value="id"
-          item-title="name"
-          v-model="form.users"
-          :error-messages="form.errors.users"
-          @update:model-value="form.clearErrors('users')"
-      />
+      <div class="grid md:grid-cols-2 gap-4">
+        <VTextField
+            color="primary"
+            label="Name"
+            variant="outlined"
+            density="comfortable"
+            v-model="form.name"
+            :error-messages="form.errors.name"
+            @update:model-value="form.clearErrors('name')"
+        />
+        <VTextField
+            type="date"
+            label="Due Date"
+            variant="outlined"
+            density="comfortable"
+            v-model="form.due_date"
+            :error-messages="form.errors.due_date"
+            @update:model-value="form.clearErrors('due_date')"
+        />
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
 
-      <VTextarea
-          color="primary"
-          label="Description"
-          variant="outlined"
-          density="comfortable"
+        <VSelect
+            color="primary"
+            label="Priority"
+            variant="outlined"
+            density="comfortable"
+            :items="['Low', 'Medium', 'High']"
+            v-model="form.priority"
+            :error-messages="form.errors.priority"
+            @update:model-value="form.clearErrors('priority')"
+        />
+        <VSelect
+            color="primary"
+            label="Assign To"
+            multiple
+            closable-chips
+            chips
+            variant="outlined"
+            density="comfortable"
+            :items="users"
+            item-value="id"
+            item-title="name"
+            v-model="form.users"
+            :error-messages="form.errors.users"
+            @update:model-value="form.clearErrors('users')"
+        />
+      </div>
+
+      <Editor
+          label="Details"
           v-model="form.description"
-          :error-messages="form.errors.description"
+          :error="form.errors.description"
           @update:model-value="form.clearErrors('description')"
       />
+
 
       <VTextarea
           color="primary"
@@ -168,8 +172,7 @@ watch(() => internalValue.value, () => {
 </template>
 
 <style scoped>
-:deep(.mdi-close-circle)
-{
+:deep(.mdi-close-circle) {
   @apply text-primary-500
 }
 

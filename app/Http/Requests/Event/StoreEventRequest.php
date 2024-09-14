@@ -23,9 +23,13 @@ class StoreEventRequest extends FormRequest
     {
         return [
             'event_name' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
+            'description' => ['required'],
             'date_open' => 'required|date|after_or_equal:today',
             'date_close' => 'required|date|after:date_open',
+            'state' => ['required','max:255'],
+            'city' => ['required','max:255'],
+            'street' => ['required','max:255'],
+            'barangay' => ['required','max:255'],
         ];
     }
 }

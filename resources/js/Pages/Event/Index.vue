@@ -10,7 +10,7 @@ import PageHeader from "@/Components/Global/PageHeader.vue";
 import EventForm from "@/Pages/Event/EventForm.vue";
 import PageHeading from "@/Components/Global/Navigators/PageHeading.vue";
 import {useRole} from "@/Composables/useRole.js";
-
+import ActionView from "@/Components/Common/Button/ActionView.vue";
 
 const tableHeader = [
     {label: 'Name', field: 'event_name'},
@@ -26,7 +26,7 @@ const showEventForm = ref(false)
 
 const eventData = ref({});
 
-const {isInRole} = useRole()
+const {isInRole, hasRole} = useRole()
 
 const editData = (data) => {
     eventData.value = {...data}
@@ -54,7 +54,7 @@ const pages = [
     <AuthenticatedLayout>
       <PageHeading :title="title" :pages="pages">
         <template #action>
-          <div class="space-x-4">
+          <div v-if="isInRole(['Super Admin', 'Admin'])" class="space-x-4">
             <VBtn @click="showEventForm = true" variant="outlined" color="primary">
               <i class="bi bi-plus mr-1"></i>
               Create
@@ -63,6 +63,7 @@ const pages = [
         </template>
       </PageHeading>
         <div class="overflow-y-auto">
+
             <div class="bg-white rounded-lg p-6">
                 <DataTable
                     class="mb-12"
@@ -80,8 +81,11 @@ const pages = [
                     </template>
                     <template #column_action="{props}">
                         <div class="flex justify-end items-center">
-                            <ActionEdit v-if="isInRole(['Super Admin', 'Admin'])" @click="editData(props)"/>
-                            <ActionDelete v-if="isInRole(['Super Admin', 'Admin'])" @click="destroyData(props.id)"/>
+                          <ActionView link :href="route('admin.events.show',props.id)"/>
+                          <template v-if="hasRole('Super Admin') || hasRole('Admin')">
+                            <ActionEdit @click="editData(props)"/>
+                            <ActionDelete @click="destroyData(props.id)"/>
+                          </template>
                         </div>
                     </template>
                 </DataTable>

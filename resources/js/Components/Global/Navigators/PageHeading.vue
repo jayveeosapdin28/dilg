@@ -23,7 +23,7 @@ defineProps({
 <!--                </ol>-->
             </nav>
         </div>
-        <div class="mt-2 md:flex md:items-center md:justify-between ">
+        <div class="mt-2 flex md:items-center justify-between ">
             <div class="min-w-0 flex-1">
                 <h2 class="text-xl font-semibold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">{{title}}</h2>
             </div>

@@ -25,8 +25,8 @@ class StoreTaskRequest extends FormRequest
             'name' => ['required','max:255'],
             'due_date' => ['required','max:255'],
             'priority' => ['required','max:255'],
-            'comments' => ['required','max:1000'],
-            'description' => ['required','max:1000'],
+            'comments' => ['required'],
+            'description' => ['required'],
             'users' => ['nullable'],
         ];
     }

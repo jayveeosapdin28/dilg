@@ -15,9 +15,22 @@ class Event extends Model
         'event_name',
         'date_open',
         'date_close',
-        'country_id',
-        'state_id',
-        'city_id',
+        'country',
+        'state',
+        'city',
+        'street',
+        'barangay',
+        'zip_code',
         'description',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->country = 'Philippines';
+            $model->zip_code = '0';
+        });
+    }
 }

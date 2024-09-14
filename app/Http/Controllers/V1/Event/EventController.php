@@ -5,9 +5,14 @@ namespace App\Http\Controllers\V1\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\StoreEventRequest;
 use App\Http\Requests\Event\UpdateEventRequest;
+use App\Models\Address\Barangay;
+use App\Models\Address\City;
+use App\Models\Address\Province;
 use App\Models\Event\Event;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
+
 
 class EventController extends Controller
 {
@@ -35,6 +40,9 @@ class EventController extends Controller
 
               return inertia('Event/Index', [
                   'events' => $events,
+                  'cities' => $request->state ? City::options($request->state) : [],
+                  'provinces' => Province::options(),
+                  'barangays' => $request->city ? Barangay::options($request->city) : [],
                   'request' => $request->all(),
               ]);
 
@@ -55,7 +63,9 @@ class EventController extends Controller
         abort_if(!auth()->user()->can('view event'), Response::HTTP_FORBIDDEN, '401 Unauthorized');
 
         $event = Event::with([])->find($id);
-        return inertia('Event/Show');
+        return inertia('Event/Show',[
+            'data' => $event,
+        ]);
     }
 
     public function store(StoreEventRequest $request)

@@ -64,6 +64,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         ),
         'W' => 
         array (
+            'Woenel\\Prpcmblmts\\' => 18,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
@@ -242,6 +243,10 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'Woenel\\Prpcmblmts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/woenel/prpcmblmts/src',
         ),
         'Whoops\\' => 
         array (
@@ -720,6 +725,8 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Console\\Commands\\MakeCrudCommand' => __DIR__ . '/../..' . '/app/Console/Commands/MakeCrudCommand.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Contracts\\PathsRepository' => __DIR__ . '/..' . '/laravel/pint/app/Contracts/PathsRepository.php',
+        'App\\Events\\NotificationEvent' => __DIR__ . '/../..' . '/app/Events/NotificationEvent.php',
+        'App\\Events\\SentMessageEvent' => __DIR__ . '/../..' . '/app/Events/SentMessageEvent.php',
         'App\\Factories\\ConfigurationFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationFactory.php',
         'App\\Factories\\ConfigurationResolverFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationResolverFactory.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
@@ -732,6 +739,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Controllers\\Auth\\RegisteredUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisteredUserController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\File\\FileController' => __DIR__ . '/../..' . '/app/Http/Controllers/File/FileController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\V1\\Case\\CaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/Case/CaseController.php',
@@ -739,6 +747,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Controllers\\V1\\Chat\\ChatRoomController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/Chat/ChatRoomController.php',
         'App\\Http\\Controllers\\V1\\Document\\DocumentController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/Document/DocumentController.php',
         'App\\Http\\Controllers\\V1\\Event\\EventController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/Event/EventController.php',
+        'App\\Http\\Controllers\\V1\\Notification\\NotificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/Notification/NotificationController.php',
         'App\\Http\\Controllers\\V1\\Rank\\RankController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/Rank/RankController.php',
         'App\\Http\\Controllers\\V1\\Task\\TaskController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/Task/TaskController.php',
         'App\\Http\\Controllers\\V1\\User\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/V1/User/UserController.php',
@@ -773,9 +782,11 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Models\\Event\\Event' => __DIR__ . '/../..' . '/app/Models/Event/Event.php',
         'App\\Models\\Event\\Relations\\EventRelation' => __DIR__ . '/../..' . '/app/Models/Event/Relations/EventRelation.php',
         'App\\Models\\Event\\Scopes\\EventScope' => __DIR__ . '/../..' . '/app/Models/Event/Scopes/EventScope.php',
+        'App\\Models\\Notification' => __DIR__ . '/../..' . '/app/Models/Notification.php',
         'App\\Models\\Rank\\Rank' => __DIR__ . '/../..' . '/app/Models/Rank/Rank.php',
         'App\\Models\\Rank\\Relations\\RankRelation' => __DIR__ . '/../..' . '/app/Models/Rank/Relations/RankRelation.php',
         'App\\Models\\Rank\\Scopes\\RankScope' => __DIR__ . '/../..' . '/app/Models/Rank/Scopes/RankScope.php',
+        'App\\Models\\TaskDocument' => __DIR__ . '/../..' . '/app/Models/TaskDocument.php',
         'App\\Models\\Task\\Relations\\TaskRelation' => __DIR__ . '/../..' . '/app/Models/Task/Relations/TaskRelation.php',
         'App\\Models\\Task\\Scopes\\TaskScope' => __DIR__ . '/../..' . '/app/Models/Task/Scopes/TaskScope.php',
         'App\\Models\\Task\\Task' => __DIR__ . '/../..' . '/app/Models/Task/Task.php',
@@ -792,6 +803,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\CommandsServiceProvider' => __DIR__ . '/..' . '/laravel/pint/app/Providers/CommandsServiceProvider.php',
         'App\\Providers\\RepositoriesServiceProvider' => __DIR__ . '/..' . '/laravel/pint/app/Providers/RepositoriesServiceProvider.php',
+        'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Repositories\\ConfigurationJsonRepository' => __DIR__ . '/..' . '/laravel/pint/app/Repositories/ConfigurationJsonRepository.php',
         'App\\Repositories\\GitPathsRepository' => __DIR__ . '/..' . '/laravel/pint/app/Repositories/GitPathsRepository.php',
         'App\\ValueObjects\\Issue' => __DIR__ . '/..' . '/laravel/pint/app/ValueObjects/Issue.php',
@@ -7570,6 +7582,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Woenel\\Prpcmblmts\\ServiceProvider' => __DIR__ . '/..' . '/woenel/prpcmblmts/src/ServiceProvider.php',
         'ZipStream\\CentralDirectoryFileHeader' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/CentralDirectoryFileHeader.php',
         'ZipStream\\CompressionMethod' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/CompressionMethod.php',
         'ZipStream\\DataDescriptor' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/DataDescriptor.php',
