@@ -52,7 +52,7 @@ const tableHeader = [
 <template>
   <Head :title="title"/>
   <AuthenticatedLayout>
-    <div class="pb-12">
+    <div class="pb-6">
       <Link :href="route('admin.tasks.index')">
         <VBtn  variant="outlined" color="primary">
           <i class="bi bi-chevron-left mr-1"></i>
@@ -61,7 +61,7 @@ const tableHeader = [
       </Link>
     </div>
 
-    <div class="h-full overflow-y-auto pb-8">
+    <div class="h-full overflow-y-auto pb-24">
       <div class="max-w-5xl mx-auto px-6 ">
         <h2 class="font-semibold text-slate-800 text-4xl">{{ title }}</h2>
         <div class="text-slate-600 mt-4">
