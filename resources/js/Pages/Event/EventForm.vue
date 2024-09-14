@@ -49,7 +49,7 @@ const filter = ref({
 
 watch(() => form.state, (val) => {
   filter.value.state = val
-  if(!val){
+  if (!val) {
     form.city = null;
   }
   router.get(route('admin.events.index'), filter.value, {
@@ -59,7 +59,7 @@ watch(() => form.state, (val) => {
 
 watch(() => form.city, (val) => {
   filter.value.city = val
-  if(!val){
+  if (!val) {
     form.barangay = null;
   }
   router.get(route('admin.events.index'), filter.value, {
@@ -98,10 +98,10 @@ watch(() => internalValue.value, () => {
 })
 
 onMounted(() => {
-  if(request.value.city && !form.state){
+  if (request.value.city && !form.state) {
     form.city = request.value.city;
   }
-  if(request.value.state && !form.state){
+  if (request.value.state && !form.state) {
     form.state = request.value.state;
   }
 })
@@ -131,26 +131,28 @@ onMounted(() => {
           :error-messages="form.errors.event_name"
           @update:model-value="form.clearErrors('event_name')"
       />
-      <VTextField
-          color="primary"
-          label="Date From"
-          variant="outlined"
-          type="date"
-          density="comfortable"
-          v-model="form.date_open"
-          :error-messages="form.errors.date_open"
-          @update:model-value="form.clearErrors('date_open')"
-      />
-      <VTextField
-          color="primary"
-          label="Date To"
-          type="date"
-          variant="outlined"
-          density="comfortable"
-          v-model="form.date_close"
-          :error-messages="form.errors.date_close"
-          @update:model-value="form.clearErrors('date_close')"
-      />
+      <div class="md:grid grid-cols-2 gap-4">
+        <VTextField
+            color="primary"
+            label="Date From"
+            variant="outlined"
+            type="date"
+            density="comfortable"
+            v-model="form.date_open"
+            :error-messages="form.errors.date_open"
+            @update:model-value="form.clearErrors('date_open')"
+        />
+        <VTextField
+            color="primary"
+            label="Date To"
+            type="date"
+            variant="outlined"
+            density="comfortable"
+            v-model="form.date_close"
+            :error-messages="form.errors.date_close"
+            @update:model-value="form.clearErrors('date_close')"
+        />
+      </div>
 
       <div class="md:grid grid-cols-2 gap-4">
         <VSelect
