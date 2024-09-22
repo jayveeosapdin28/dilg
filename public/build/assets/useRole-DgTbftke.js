@@ -1,1 +1,0 @@
-import{Q as s,m as o}from"./app-BKaUXmZh.js";function t(){const r=s();return{hasRole:e=>o(()=>r.props.auth.user.role.indexOf(e)!==-1).value,isInRole:e=>Array.isArray(e)?o(()=>e.includes(r.props.auth.user.role)).value:!1}}export{t as u};
