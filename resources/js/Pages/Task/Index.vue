@@ -27,7 +27,6 @@ const tableHeader = ref([
   {label: 'Submitted Documents', field: 'documents_count'},
   {label: 'Comment', field: 'comments'},
   {label: 'Due Date', field: 'due_date'},
-  {label: 'Due Date', field: 'due_date'},
   {label: 'Actions', field: 'action', width: '5%'},
 ])
 

@@ -14,40 +14,37 @@ class DashboardController extends Controller
 {
     public function index(){
 
+        $is_admin = in_array(auth()->user()->role, ['Admin', 'Super Admin']);
+
+
         return inertia('Dashboard',[
             'data' => [
                [
                    'name' => 'Tasks',
                    'icon'=> 'bi bi-card-checklist',
-                   'stat' =>  Task::count(),
+                   'stat' =>  $is_admin ? Task::count() : Task::whereJsonContains('users', auth()->user()->id)->count() ,
                    'link' =>  '/admin/tasks',
-                   'change' => $this->calculateStatsPercentage(Task::class)['percentageChange'],
-                   'changeType' => $this->calculateStatsPercentage(Task::class)['changeType'],
                ],
                 [
                    'name' => 'Events',
                    'stat' =>  Event::count(),
                     'link' =>  '/admin/events',
                     'icon'=> 'bi bi-calendar2-week',
-                    'change' => $this->calculateStatsPercentage(Event::class)['percentageChange'],
-                    'changeType' => $this->calculateStatsPercentage(Event::class)['changeType'],
                ],
                 [
                    'name' => 'Cases',
-                   'stat' =>  CaseFile::count(),
+                   'stat' =>  $is_admin ? CaseFile::count() : CaseFile::where('user_id',auth()->user()->id)->count(),
                     'link' =>  '/admin/cases',
                     'icon'=> 'bi bi-folder2',
-                    'change' => $this->calculateStatsPercentage(CaseFile::class)['percentageChange'],
-                    'changeType' => $this->calculateStatsPercentage(CaseFile::class)['changeType'],
                ],
-                [
-                   'name' => 'Documents',
-                   'stat' =>  Document::count(),
-                    'link' =>  '/admin/documents',
-                    'icon'=> 'bi bi-files',
-                    'change' => $this->calculateStatsPercentage(Document::class)['percentageChange'],
-                    'changeType' => $this->calculateStatsPercentage(Document::class)['changeType'],
-               ],
+//                [
+//                   'name' => 'Documents',
+//                   'stat' =>  Document::count(),
+//                    'link' =>  '/admin/documents',
+//                    'icon'=> 'bi bi-files',
+//                    'change' => $this->calculateStatsPercentage(Document::class)['percentageChange'],
+//                    'changeType' => $this->calculateStatsPercentage(Document::class)['changeType'],
+//               ],
             ]
         ]);
     }

@@ -42,6 +42,6 @@ class ChatRoom extends Model
             ->where('user_id', '!=', auth()->user()->id)
             ->first();
 
-        return User::find($users->user_id)->name;
+        return optional(User::find($users->user_id))->name;
     }
 }
